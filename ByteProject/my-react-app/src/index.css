@@ -1,0 +1,29 @@
+.placeholder-graph {
+  min-height: 500px; /* Larger placeholder for the graph */
+  border: 1px solid #000;
+  margin-right: 200px; /* Space for the vertical navbar */
+}
+
+/* Style adjustments when the viewport is less than 1200px */
+@media (max-width: 1199px) {
+  .placeholder-graph {
+    margin-right: 100px; /* Smaller space for the navbar on smaller screens */
+  }
+}
+
+.vertical-nav {
+  min-width: 100px;
+  max-width: 200px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  border-left: 1px solid #dee2e6;
+}
+
+/* Add padding and margin to the links in the vertical navigation */
+.vertical-nav .btn-link {
+  display: block; /* Ensure each link occupies its own line */
+  padding: 8px 12px; /* Adjust padding as needed */
+  margin-bottom: 8px; /* Add margin to create space between links */
+}
