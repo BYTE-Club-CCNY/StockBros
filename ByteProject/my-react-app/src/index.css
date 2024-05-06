@@ -1,16 +1,25 @@
-.placeholder-graph {
-  min-height: 500px; /* Larger placeholder for the graph */
-  border: 1px solid #000;
-  margin-right: 200px; /* Space for the vertical navbar */
+body {
+  background-color: #AF8260; /* @MudassirSami27 this is where i adjusted the background color */
+  color: #803D3B;
+  font-family: Arial, sans-serif; /* Clean and simple font */
 }
 
-/* Style adjustments when the viewport is less than 1200px */
+.placeholder-graph {
+  min-height: 500px;
+  border: 2px solid #ccc; /* Softer border color */
+  border-radius: 8px; /* Rounded corners */
+  margin-right: 200px;
+  background-color: #fff; /* White background for contrast */
+}
+
+/* Responsive styles for the placeholder graph */
 @media (max-width: 1199px) {
   .placeholder-graph {
-    margin-right: 100px; /* Smaller space for the navbar on smaller screens */
+    margin-right: 100px;
   }
 }
 
+/* Styles for the vertical navbar with rounded edges and cream background */
 .vertical-nav {
   min-width: 100px;
   max-width: 200px;
@@ -18,12 +27,21 @@
   position: fixed;
   top: 0;
   right: 0;
-  border-left: 1px solid #dee2e6;
+  border-left: 2px solid #dee2e6;
+  background-color: #f8f8f8; /* Matching the body background */
+  border-top-right-radius: 10px; /* Rounded top right corner */
+  border-bottom-right-radius: 10px; /* Rounded bottom right corner */
 }
 
-/* Add padding and margin to the links in the vertical navigation */
 .vertical-nav .btn-link {
-  display: block; /* Ensure each link occupies its own line */
-  padding: 8px 12px; /* Adjust padding as needed */
-  margin-bottom: 8px; /* Add margin to create space between links */
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  color: #333; /* Dark grey color for text */
+  text-decoration: none; /* No underlines */
+}
+
+.vertical-nav .btn-link:hover {
+  background-color: #94B0DA;
+  color: #000;
 }
