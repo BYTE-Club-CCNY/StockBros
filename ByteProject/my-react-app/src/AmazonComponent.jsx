@@ -30,7 +30,7 @@ const AmazonComponent = () => {
         {/* Main content */}
         <div className="col">
           <h1>Amazon Stock Information</h1>
-          <div className="AppB">
+          <div className="AppA">
             <DateRangePickerA fetchData={fetchData} /> {/* Pass fetchData function as prop */}
             {error && <div>Error: {error}</div>}
             {plotData && <Plot data={plotData.data} layout={plotData.layout} />}
