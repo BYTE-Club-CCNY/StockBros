@@ -1,29 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Plot from 'react-plotly.js';
+import DateRangePickerC from './DateRangePickerC'; // Import the DateRangePicker component
 
-class MetaComponent extends React.Component {
-    render() {
-      return (
-        <div className="container-fluid">
-          <div className="row">
-  
-            {/* Main content */}
-            <div className="col">
-              <h1>Meta Stock Information</h1>
-              <div className="placeholder-graph mb-3 p-2">
-                {/* Placeholder for the stock graph */}
-                <p className="text-center">Meta stock graph goes here</p>
-              </div>
-              <div className="p-2" style={{ border: '1px solid #000' }}>
-                {/* Placeholder for the top news section */}
-                <h2>Top News</h2>
-                {/* News items will be populated here */}
-              </div>
-            </div>
-  
+const MetaComponent = () => {
+  const [plotData, setPlotData] = useState(null);
+  const [error, setError] = useState(null);
+
+  // useEffect hook to fetch plot data initially
+  useEffect(() => {
+    fetchData();
+  }, []); // Empty dependency array to run only once on component mount
+
+  // Function to fetch plot data from the Flask backend
+  const fetchData = async (startDate, endDate) => {
+    try {
+      // Adjust the Axios request URL to point to the Flask backend
+      const response = await axios.post('http://localhost:5000/plotC', { start_date: startDate, end_date: endDate });
+      setPlotData(response.data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  return (
+    <div className="container-fluid">
+      <div className="row">
+
+        {/* Main content */}
+        <div className="col">
+          <h1>Amazon Stock Information</h1>
+          <div className="AppC">
+            <DateRangePickerC fetchData={fetchData} /> {/* Pass fetchData function as prop */}
+            {error && <div>Error: {error}</div>}
+            {plotData && <Plot data={plotData.data} layout={plotData.layout} />}
+          </div>
+          <div className="p-2" style={{ border: '1px solid #000' }}>
+            {/* Placeholder for the top news section */}
+            <h2>Top News</h2>
+            {/* News items will be populated here */}
           </div>
         </div>
-      );
-    }
-  }
-  
-  export default MetaComponent;
+
+      </div>
+    </div>
+  );
+};
+
+export default MetaComponent;

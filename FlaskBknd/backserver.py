@@ -43,7 +43,7 @@ def generate_plot(start_date, end_date, stockfile, stockname):
     return fig
 
 @app.route('/plot', methods=['POST'])
-def plot():
+def plot():    # This is Nvidia
     # Handle POST request to generate plot
     # Retrieve start_date and end_date from request data
     start_date = request.json.get('start_date')
@@ -62,7 +62,7 @@ def plot():
 
 
 @app.route('/plotA', methods=['POST'])
-def plotA():
+def plotA():   ####### this is Amazon
     # Handle POST request to generate plot
     # Retrieve start_date and end_date from request data
     start_date = request.json.get('start_date')
@@ -80,7 +80,7 @@ def plotA():
     return jsonify(fig_data_converted)
 
 @app.route('/plotB', methods=['POST'])
-def plotB():
+def plotB():           # This is Apple 
     # Handle POST request to generate plot
     # Retrieve start_date and end_date from request data
     start_date = request.json.get('start_date')
@@ -90,6 +90,24 @@ def plotB():
     
     # Generate the Plotly graph
     fig = generate_plot(start_date, end_date, stockfile = 'AAPL', stockname = 'AAPL')
+    
+    # Convert NumPy arrays to lists in the entire figure data
+    fig_data_converted = convert_np_arrays_to_lists(fig.to_dict())
+
+    # Return the Plotly graph data as JSON
+    return jsonify(fig_data_converted)
+
+@app.route('/plotC', methods=['POST'])
+def plotC():           # This is Apple 
+    # Handle POST request to generate plot
+    # Retrieve start_date and end_date from request data
+    start_date = request.json.get('start_date')
+    end_date = request.json.get('end_date')
+    # Generate plot based on start_date and end_date
+    # Return plot data as JSON response
+    
+    # Generate the Plotly graph
+    fig = generate_plot(start_date, end_date, stockfile = 'META', stockname = 'META')
     
     # Convert NumPy arrays to lists in the entire figure data
     fig_data_converted = convert_np_arrays_to_lists(fig.to_dict())
