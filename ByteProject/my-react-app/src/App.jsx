@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Plot from 'react-plotly.js';
 import Home from './Home';
 import VerticalNav from './VerticalNav'; // Importing VerticalNav component
 import AmazonComponent from './AmazonComponent';
