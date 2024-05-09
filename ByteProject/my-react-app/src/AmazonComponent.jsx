@@ -16,7 +16,7 @@ const AmazonComponent = () => {
   const fetchData = async (startDate, endDate) => {
     try {
       // Adjust the Axios request URL to point to the Flask backend
-      const response = await axios.post('http://localhost:5000/plotamzn', { start_date: startDate, end_date: endDate });
+      const response = await axios.post('http://localhost:5000/plotA', { start_date: startDate, end_date: endDate });
       setPlotData(response.data);
     } catch (error) {
       setError(error.message);
@@ -30,7 +30,7 @@ const AmazonComponent = () => {
         {/* Main content */}
         <div className="col">
           <h1>Amazon Stock Information</h1>
-          <div className="App">
+          <div className="AppB">
             <DateRangePickerA fetchData={fetchData} /> {/* Pass fetchData function as prop */}
             {error && <div>Error: {error}</div>}
             {plotData && <Plot data={plotData.data} layout={plotData.layout} />}

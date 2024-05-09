@@ -21,9 +21,9 @@ def convert_np_arrays_to_lists(data):
         return data
 
 
-def generate_plot(start_date, end_date):
+def generate_plot(start_date, end_date, stockfile, stockname):
     # Read data from CSV file
-    df = pd.read_csv('FlaskBknd/NVDA99.csv')
+    df = pd.read_csv(f'FlaskBknd/{stockfile}.csv')
     
     # Data preprocessing
     df = df.drop_duplicates()
@@ -36,7 +36,7 @@ def generate_plot(start_date, end_date):
     df_range['Average'] = (df_range['Open'] + df_range['High'] + df_range['Low']) / 3
     
     # Generate Plotly graph
-    fig = px.line(df_range, x='Date', y='Average', title=f'NVDA Average of Open, High, and Low for {start_date} to {end_date}')
+    fig = px.line(df_range, x='Date', y='Average', title=f'{stockname} Average of Open, High, and Low for {start_date} to {end_date}')
     fig.update_xaxes(title_text='Date', tickangle=45, tickformat="%Y-%m-%d")
     fig.update_yaxes(title_text='Average in $')
     
@@ -52,7 +52,7 @@ def plot():
     # Return plot data as JSON response
     
     # Generate the Plotly graph
-    fig = generate_plot(start_date, end_date)
+    fig = generate_plot(start_date, end_date, stockfile = 'NVDA99', stockname = 'NVDA')
     
     # Convert NumPy arrays to lists in the entire figure data
     fig_data_converted = convert_np_arrays_to_lists(fig.to_dict())
@@ -61,7 +61,23 @@ def plot():
     return jsonify(fig_data_converted)
 
 
+@app.route('/plotA', methods=['POST'])
+def plotA():
+    # Handle POST request to generate plot
+    # Retrieve start_date and end_date from request data
+    start_date = request.json.get('start_date')
+    end_date = request.json.get('end_date')
+    # Generate plot based on start_date and end_date
+    # Return plot data as JSON response
+    
+    # Generate the Plotly graph
+    fig = generate_plot(start_date, end_date, stockfile = 'AMZN2', stockname = 'AMZN')
+    
+    # Convert NumPy arrays to lists in the entire figure data
+    fig_data_converted = convert_np_arrays_to_lists(fig.to_dict())
 
+    # Return the Plotly graph data as JSON
+    return jsonify(fig_data_converted)
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ function DateRangePickerA() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/plotamzn', { start_date: startDate, end_date: endDate });
+      const response = await axios.post('http://localhost:5000/plotA', { start_date: startDate, end_date: endDate });
       setPlotData(response.data);
     } catch (error) {
       console.error('Error fetching plot data:', error);
