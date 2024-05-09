@@ -29,7 +29,7 @@ const AppleComponent = () => {
 
         {/* Main content */}
         <div className="col">
-          <h1>Amazon Stock Information</h1>
+          <h1>APPLE Stock Information</h1>
           <div className="AppB">
             <DateRangePickerB fetchData={fetchData} /> {/* Pass fetchData function as prop */}
             {error && <div>Error: {error}</div>}
