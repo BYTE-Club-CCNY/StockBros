@@ -5,19 +5,32 @@ import DateRangePickerC from './DateRangePickerC'; // Import the DateRangePicker
 
 const MetaComponent = () => {
   const [plotData, setPlotData] = useState(null);
+  const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState(null);
 
-  // useEffect hook to fetch plot data initially
   useEffect(() => {
     fetchData();
-  }, []); // Empty dependency array to run only once on component mount
+    fetchNews();
+  }, []);
 
-  // Function to fetch plot data from the Flask backend
   const fetchData = async (startDate, endDate) => {
     try {
-      // Adjust the Axios request URL to point to the Flask backend
       const response = await axios.post('http://localhost:5000/plotC', { start_date: startDate, end_date: endDate });
       setPlotData(response.data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const fetchNews = async (startDate, endDate) => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/meta', {
+        params: {
+          start_date: startDate,
+          end_date: endDate
+        }
+      });
+      setNewsData(response.data);
     } catch (error) {
       setError(error.message);
     }
@@ -29,16 +42,21 @@ const MetaComponent = () => {
 
         {/* Main content */}
         <div className="col">
-          <h1>META Stock Information</h1>
-          <div className="AppC">
-            <DateRangePickerC fetchData={fetchData} /> {/* Pass fetchData function as prop */}
+          <h1>Meta Stock Information</h1>
+          <div className="AppD">
+            <DateRangePickerC fetchData={fetchData} fetchNews={fetchNews} /> {/* Pass fetchData and fetchNews functions as props */}
             {error && <div>Error: {error}</div>}
             {plotData && <Plot data={plotData.data} layout={plotData.layout} />}
           </div>
           <div className="p-2" style={{ border: '1px solid #000' }}>
-            {/* Placeholder for the top news section */}
-            <h2>Top News</h2>
-            {/* News items will be populated here */}
+            <h2>Top News From this Date Range</h2>
+            <ul>
+              {newsData.map((item, index) => (
+                <li key={index}>
+                  <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
@@ -46,5 +64,6 @@ const MetaComponent = () => {
     </div>
   );
 };
+
 
 export default MetaComponent;

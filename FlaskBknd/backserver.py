@@ -3,6 +3,7 @@ from flask_cors import CORS
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import worldnewsapi
 #import plotly.graph_objs as go
 
 
@@ -132,6 +133,123 @@ def plotD():           # This is Netflix
 
     # Return the Plotly graph data as JSON
     return jsonify(fig_data_converted)
+
+@app.route('/api/nflx')
+def get_newsnflx():
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+
+    configuration = worldnewsapi.Configuration()    
+    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
+
+    try:
+        sn_response = api_instance.search_news(text="Netflix Stock", 
+                                                number=4,  # Increased number of news items
+                                                source_countries="us", 
+                                                earliest_publish_date=start_date, 
+                                                latest_publish_date=end_date,
+                                                sort="publish-time", 
+                                                sort_direction="desc")
+        news_data = [{'title': article.title, 'url': article.url} for article in sn_response.news]
+        return jsonify(news_data)
+
+    except worldnewsapi.ApiException as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/meta')
+def get_newsmeta():
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+
+    configuration = worldnewsapi.Configuration()    
+    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
+
+    try:
+        sn_response = api_instance.search_news(text="Facebook META", 
+                                                number=4,  # Increased number of news items
+                                                source_countries="us", 
+                                                earliest_publish_date=start_date, 
+                                                latest_publish_date=end_date,
+                                                sort="publish-time", 
+                                                sort_direction="desc")
+        news_data = [{'title': article.title, 'url': article.url} for article in sn_response.news]
+        return jsonify(news_data)
+
+    except worldnewsapi.ApiException as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/nvda')
+def get_newsnvda():
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+
+    configuration = worldnewsapi.Configuration()    
+    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
+
+    try:
+        sn_response = api_instance.search_news(text="Nvidia", 
+                                                number=4,  # Increased number of news items
+                                                source_countries="us", 
+                                                earliest_publish_date=start_date, 
+                                                latest_publish_date=end_date,
+                                                sort="publish-time", 
+                                                sort_direction="desc")
+        news_data = [{'title': article.title, 'url': article.url} for article in sn_response.news]
+        return jsonify(news_data)
+
+    except worldnewsapi.ApiException as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/amzn')
+def get_newsamzn():
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+
+    configuration = worldnewsapi.Configuration()    
+    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
+
+    try:
+        sn_response = api_instance.search_news(text="Amazon Stock", 
+                                                number=4,  # Increased number of news items
+                                                source_countries="us", 
+                                                earliest_publish_date=start_date, 
+                                                latest_publish_date=end_date,
+                                                sort="publish-time", 
+                                                sort_direction="desc")
+        news_data = [{'title': article.title, 'url': article.url} for article in sn_response.news]
+        return jsonify(news_data)
+
+    except worldnewsapi.ApiException as e:
+        return jsonify({'error': str(e)}), 500
+    
+    
+@app.route('/api/aapl')
+def get_newsaapl():
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+
+    configuration = worldnewsapi.Configuration()    
+    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
+
+    try:
+        sn_response = api_instance.search_news(text="Apple Stock", 
+                                                number=4,  # Increased number of news items
+                                                source_countries="us", 
+                                                earliest_publish_date=start_date, 
+                                                latest_publish_date=end_date,
+                                                sort="publish-time", 
+                                                sort_direction="desc")
+        news_data = [{'title': article.title, 'url': article.url} for article in sn_response.news]
+        return jsonify(news_data)
+
+    except worldnewsapi.ApiException as e:
+        return jsonify({'error': str(e)}), 500
 
 
 if __name__ == '__main__':
