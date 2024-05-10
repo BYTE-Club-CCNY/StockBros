@@ -134,18 +134,19 @@ def plotD():           # This is Netflix
     # Return the Plotly graph data as JSON
     return jsonify(fig_data_converted)
 
-@app.route('/api/nflx')
+
+@app.route('/api/nflx', methods=['POST'])
 def get_newsnflx():
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
+    start_date = request.json.get('start_date')
+    end_date = request.json.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
+    configuration.api_key['apiKey'] = 'd7c4014147b44248a1141e12a296a11f' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
         sn_response = api_instance.search_news(text="Netflix Stock", 
-                                                number=3,  # Increased number of news items
+                                                number=1,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
@@ -156,14 +157,15 @@ def get_newsnflx():
 
     except worldnewsapi.ApiException as e:
         return jsonify({'error': str(e)}), 500
+
     
-@app.route('/api/meta')
+@app.route('/api/meta', methods=['POST'])
 def get_newsmeta():
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
+    start_date = request.json.get('start_date')
+    end_date = request.json.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
+    configuration.api_key['apiKey'] = 'd7c4014147b44248a1141e12a296a11f' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
@@ -180,13 +182,13 @@ def get_newsmeta():
     except worldnewsapi.ApiException as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/nvda')
+@app.route('/api/nvda', methods=['POST'])
 def get_newsnvda():
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
+    start_date = request.json.get('start_date')
+    end_date = request.json.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
+    configuration.api_key['apiKey'] = 'd7c4014147b44248a1141e12a296a11f' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
@@ -204,18 +206,18 @@ def get_newsnvda():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/api/amzn')
+@app.route('/api/amzn', methods=['POST'])
 def get_newsamzn():
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
+    start_date = request.json.get('start_date')
+    end_date = request.json.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
+    configuration.api_key['apiKey'] = 'd7c4014147b44248a1141e12a296a11f' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
         sn_response = api_instance.search_news(text="Amazon Stock", 
-                                                number=3,  # Increased number of news items
+                                                number=1,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
@@ -228,13 +230,13 @@ def get_newsamzn():
         return jsonify({'error': str(e)}), 500
     
     
-@app.route('/api/aapl')
+@app.route('/api/aapl', methods=['POST'])
 def get_newsaapl():
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
+    start_date = request.json.get('start_date')
+    end_date = request.json.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
+    configuration.api_key['apiKey'] = 'd7c4014147b44248a1141e12a296a11f' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:

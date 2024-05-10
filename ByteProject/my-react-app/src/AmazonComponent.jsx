@@ -8,11 +8,6 @@ const AmazonComponent = () => {
   const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-    fetchNews();
-  }, []);
-
   const fetchData = async (startDate, endDate) => {
     try {
       const response = await axios.post('http://localhost:5000/plotA', { start_date: startDate, end_date: endDate });
@@ -24,12 +19,7 @@ const AmazonComponent = () => {
 
   const fetchNews = async (startDate, endDate) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/amzn', {
-        params: {
-          start_date: startDate,
-          end_date: endDate
-        }
-      });
+      const response = await axios.post('http://localhost:5000/api/amzn', {start_date: startDate, end_date: endDate});
       setNewsData(response.data);
     } catch (error) {
       setError(error.message);

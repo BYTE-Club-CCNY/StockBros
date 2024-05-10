@@ -8,11 +8,6 @@ const MetaComponent = () => {
   const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-    fetchNews();
-  }, []);
-
   const fetchData = async (startDate, endDate) => {
     try {
       const response = await axios.post('http://localhost:5000/plotC', { start_date: startDate, end_date: endDate });
@@ -24,12 +19,7 @@ const MetaComponent = () => {
 
   const fetchNews = async (startDate, endDate) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/meta', {
-        params: {
-          start_date: startDate,
-          end_date: endDate
-        }
-      });
+      const response = await axios.post('http://localhost:5000/api/meta', {start_date: startDate, end_date: endDate});
       setNewsData(response.data);
     } catch (error) {
       setError(error.message);
@@ -43,13 +33,13 @@ const MetaComponent = () => {
         {/* Main content */}
         <div className="col">
           <h1>Meta Stock Information</h1>
-          <div className="AppC">
+          <div className="AppB">
             <DateRangePickerC fetchData={fetchData} fetchNews={fetchNews} /> {/* Pass fetchData and fetchNews functions as props */}
             {error && <div>Error: {error}</div>}
             {plotData && <Plot data={plotData.data} layout={plotData.layout} />}
           </div>
           <div className="p-2" style={{ border: '1px solid #000' }}>
-            <h2>Meta Related News From this Date Range</h2>
+            <h2>Meta related News From this Date Range</h2>
             <ul>
               {newsData.map((item, index) => (
                 <li key={index}>
@@ -64,6 +54,5 @@ const MetaComponent = () => {
     </div>
   );
 };
-
 
 export default MetaComponent;

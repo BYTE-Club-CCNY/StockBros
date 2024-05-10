@@ -8,11 +8,6 @@ const NvidiaComponent = () => {
   const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-    fetchNews();
-  }, []);
-
   const fetchData = async (startDate, endDate) => {
     try {
       const response = await axios.post('http://localhost:5000/plot', { start_date: startDate, end_date: endDate });
@@ -24,12 +19,7 @@ const NvidiaComponent = () => {
 
   const fetchNews = async (startDate, endDate) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/nvda', {
-        params: {
-          start_date: startDate,
-          end_date: endDate
-        }
-      });
+      const response = await axios.post('http://localhost:5000/api/nvda', {start_date: startDate, end_date: endDate});
       setNewsData(response.data);
     } catch (error) {
       setError(error.message);
@@ -43,7 +33,7 @@ const NvidiaComponent = () => {
         {/* Main content */}
         <div className="col">
           <h1>Nvidia Stock Information</h1>
-          <div className="App">
+          <div className="AppB">
             <DateRangePicker fetchData={fetchData} fetchNews={fetchNews} /> {/* Pass fetchData and fetchNews functions as props */}
             {error && <div>Error: {error}</div>}
             {plotData && <Plot data={plotData.data} layout={plotData.layout} />}
