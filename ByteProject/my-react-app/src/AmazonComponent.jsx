@@ -5,19 +5,32 @@ import DateRangePickerA from './DateRangePickerA'; // Import the DateRangePicker
 
 const AmazonComponent = () => {
   const [plotData, setPlotData] = useState(null);
+  const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState(null);
 
-  // useEffect hook to fetch plot data initially
   useEffect(() => {
     fetchData();
-  }, []); // Empty dependency array to run only once on component mount
+    fetchNews();
+  }, []);
 
-  // Function to fetch plot data from the Flask backend
   const fetchData = async (startDate, endDate) => {
     try {
-      // Adjust the Axios request URL to point to the Flask backend
       const response = await axios.post('http://localhost:5000/plotA', { start_date: startDate, end_date: endDate });
       setPlotData(response.data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const fetchNews = async (startDate, endDate) => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/amzn', {
+        params: {
+          start_date: startDate,
+          end_date: endDate
+        }
+      });
+      setNewsData(response.data);
     } catch (error) {
       setError(error.message);
     }
@@ -31,14 +44,19 @@ const AmazonComponent = () => {
         <div className="col">
           <h1>Amazon Stock Information</h1>
           <div className="AppA">
-            <DateRangePickerA fetchData={fetchData} /> {/* Pass fetchData function as prop */}
+            <DateRangePickerA fetchData={fetchData} fetchNews={fetchNews} /> {/* Pass fetchData and fetchNews functions as props */}
             {error && <div>Error: {error}</div>}
             {plotData && <Plot data={plotData.data} layout={plotData.layout} />}
           </div>
           <div className="p-2" style={{ border: '1px solid #000' }}>
-            {/* Placeholder for the top news section */}
-            <h2>Top News</h2>
-            {/* News items will be populated here */}
+            <h2>Amazon related News From this Date Range</h2>
+            <ul>
+              {newsData.map((item, index) => (
+                <li key={index}>
+                  <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

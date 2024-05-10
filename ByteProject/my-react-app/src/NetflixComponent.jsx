@@ -49,7 +49,7 @@ const NetflixComponent = () => {
             {plotData && <Plot data={plotData.data} layout={plotData.layout} />}
           </div>
           <div className="p-2" style={{ border: '1px solid #000' }}>
-            <h2>Top News From this Date Range</h2>
+            <h2>Netflix related News From this Date Range</h2>
             <ul>
               {newsData.map((item, index) => (
                 <li key={index}>

@@ -43,13 +43,13 @@ const MetaComponent = () => {
         {/* Main content */}
         <div className="col">
           <h1>Meta Stock Information</h1>
-          <div className="AppD">
+          <div className="AppC">
             <DateRangePickerC fetchData={fetchData} fetchNews={fetchNews} /> {/* Pass fetchData and fetchNews functions as props */}
             {error && <div>Error: {error}</div>}
             {plotData && <Plot data={plotData.data} layout={plotData.layout} />}
           </div>
           <div className="p-2" style={{ border: '1px solid #000' }}>
-            <h2>Top News From this Date Range</h2>
+            <h2>Meta Related News From this Date Range</h2>
             <ul>
               {newsData.map((item, index) => (
                 <li key={index}>

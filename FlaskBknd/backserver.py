@@ -30,8 +30,8 @@ def generate_plot(start_date, end_date, stockfile, stockname):
     df = df.drop_duplicates()
     df = df.dropna()
     df['Date'] = pd.to_datetime(df['Date'])
-    ##start_date = '2020-01-01'  # You can adjust this dynamically if needed
-    ##end_date = '2021-01-01'    # You can adjust this dynamically if needed
+    ##start_date = '2023-01-01'  # You can adjust this dynamically if needed
+    ##end_date = '2023-01-30'    # You can adjust this dynamically if needed
     df_range = df[(df['Date'] >= start_date) & (df['Date'] <= end_date)]
     df_range['Date'] = df_range['Date'].dt.strftime('%Y-%m-%d')
     df_range['Average'] = (df_range['Open'] + df_range['High'] + df_range['Low']) / 3
@@ -140,12 +140,12 @@ def get_newsnflx():
     end_date = request.args.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
         sn_response = api_instance.search_news(text="Netflix Stock", 
-                                                number=4,  # Increased number of news items
+                                                number=3,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
@@ -163,12 +163,12 @@ def get_newsmeta():
     end_date = request.args.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
         sn_response = api_instance.search_news(text="Facebook META", 
-                                                number=4,  # Increased number of news items
+                                                number=3,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
@@ -186,12 +186,12 @@ def get_newsnvda():
     end_date = request.args.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
         sn_response = api_instance.search_news(text="Nvidia", 
-                                                number=4,  # Increased number of news items
+                                                number=3,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
@@ -210,12 +210,12 @@ def get_newsamzn():
     end_date = request.args.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
         sn_response = api_instance.search_news(text="Amazon Stock", 
-                                                number=4,  # Increased number of news items
+                                                number=3,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
@@ -234,12 +234,12 @@ def get_newsaapl():
     end_date = request.args.get('end_date')
 
     configuration = worldnewsapi.Configuration()    
-    configuration.api_key['apiKey'] = '4d04daab28474997a5a94bf752fd3c76' 
+    configuration.api_key['apiKey'] = '596018fc86be48098168010e348dc1d8' 
     api_instance = worldnewsapi.NewsApi(worldnewsapi.ApiClient(configuration))
 
     try:
         sn_response = api_instance.search_news(text="Apple Stock", 
-                                                number=4,  # Increased number of news items
+                                                number=3,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
