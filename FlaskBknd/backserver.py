@@ -146,7 +146,7 @@ def get_newsnflx():
 
     try:
         sn_response = api_instance.search_news(text="Netflix Stock", 
-                                                number=1,  # Increased number of news items
+                                                number=3,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
@@ -217,7 +217,7 @@ def get_newsamzn():
 
     try:
         sn_response = api_instance.search_news(text="Amazon Stock", 
-                                                number=1,  # Increased number of news items
+                                                number=3,  # Increased number of news items
                                                 source_countries="us", 
                                                 earliest_publish_date=start_date, 
                                                 latest_publish_date=end_date,
